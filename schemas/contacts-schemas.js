@@ -18,4 +18,7 @@ const contactUpdateFavoriteSchema = Joi.object({
   }),
 });
 
-export default { contactSchema, contactUpdateFavoriteSchema };
+export default { 
+  contactSchema,
+  contactUpdateFavoriteSchema
+};

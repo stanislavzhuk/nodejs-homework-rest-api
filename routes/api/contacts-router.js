@@ -1,29 +1,42 @@
 import express from 'express';
 import ctrl from '../../controllers/contacts-controllers.js';
-import contactSchema from '../../schemas/contacts-schemas.js';
-import isEmptyReq from '../../middlewares/isEmptyReq.js';
-import validateReqBody from '../../middlewares/validateReqBody.js';
+import schema from '../../schemas/contacts-schemas.js';
+import {
+  isEmptyReq,
+  isEmptyBody,
+  isValidId,
+  isEmptyFavorite
+} from "../../middlewares/index.js";
 
 const contactsRouter = express.Router();
 
 contactsRouter.get('/', ctrl.getAllContacts);
 
-contactsRouter.get('/:id', ctrl.getContactById);
+contactsRouter.get('/:id', isValidId, ctrl.getContactById);
 
-contactsRouter.post(
-  '/',
+contactsRouter.post('/',
   isEmptyReq,
-  validateReqBody(contactSchema),
+  isEmptyBody(schema.contactSchema),
   ctrl.addNewContact
 );
 
-contactsRouter.delete('/:id', ctrl.deleteContactById);
+contactsRouter.delete('/:id',
+  isValidId,
+  ctrl.deleteContactById
+);
 
-contactsRouter.put(
-  '/:id',
+contactsRouter.put('/:id',
+  isValidId,
   isEmptyReq,
-  validateReqBody(contactSchema),
+  isEmptyBody(schema.contactSchema),
   ctrl.updateContactById
+);
+
+contactsRouter.patch("/:id/favorite",
+  isValidId,
+  isEmptyFavorite,
+  isEmptyBody(schema.contactUpdateFavoriteSchema),
+  ctrl.updateStatusContact
 );
 
 export default contactsRouter;
