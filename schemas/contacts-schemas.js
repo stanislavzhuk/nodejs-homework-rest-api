@@ -4,8 +4,8 @@ const contactSchema = Joi.object({
   name: Joi.string().required().messages({
     'any.required': 'missing required name field',
   }),
-  email: Joi.string().required().email().message("invalid email").messages({
-    "any.required": "missing required email field",
+  email: Joi.string().required().email().message('invalid email').messages({
+    'any.required': 'missing required email field',
   }),
   phone: Joi.string().required().messages({
     'any.required': 'missing required phone field',
@@ -14,11 +14,11 @@ const contactSchema = Joi.object({
 
 const contactUpdateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required().messages({
-    "any.required": "missing field favorite",
+    'any.required': 'missing field favorite',
   }),
 });
 
-export default { 
+export default {
   contactSchema,
-  contactUpdateFavoriteSchema
+  contactUpdateFavoriteSchema,
 };

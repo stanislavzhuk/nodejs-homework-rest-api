@@ -5,8 +5,8 @@ import {
   isEmptyReq,
   isEmptyBody,
   isValidId,
-  isEmptyFavorite
-} from "../../middlewares/index.js";
+  isEmptyFavorite,
+} from '../../middlewares/index.js';
 
 const contactsRouter = express.Router();
 
@@ -14,25 +14,25 @@ contactsRouter.get('/', ctrl.getAllContacts);
 
 contactsRouter.get('/:id', isValidId, ctrl.getContactById);
 
-contactsRouter.post('/',
+contactsRouter.post(
+  '/',
   isEmptyReq,
   isEmptyBody(schema.contactSchema),
   ctrl.addNewContact
 );
 
-contactsRouter.delete('/:id',
-  isValidId,
-  ctrl.deleteContactById
-);
+contactsRouter.delete('/:id', isValidId, ctrl.deleteContactById);
 
-contactsRouter.put('/:id',
+contactsRouter.put(
+  '/:id',
   isValidId,
   isEmptyReq,
   isEmptyBody(schema.contactSchema),
   ctrl.updateContactById
 );
 
-contactsRouter.patch("/:id/favorite",
+contactsRouter.patch(
+  '/:id/favorite',
   isValidId,
   isEmptyFavorite,
   isEmptyBody(schema.contactUpdateFavoriteSchema),
