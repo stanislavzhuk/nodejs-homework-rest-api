@@ -1,1 +1,1 @@
-export { default as ctrlWrapper } from "../decorators/ctrlWrapper.js";
+export { default as ctrlWrapper } from '../decorators/ctrlWrapper.js';

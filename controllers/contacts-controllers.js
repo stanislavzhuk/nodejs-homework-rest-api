@@ -1,6 +1,6 @@
-import contacts from "../models/contacts.js";
-import HttpError from "../helpers/index.js";
-import { ctrlWrapper } from "../decorators/index.js";
+import contacts from '../models/contacts.js';
+import HttpError from '../helpers/index.js';
+import { ctrlWrapper } from '../decorators/index.js';
 
 const getAllContacts = async (_, res) => {
   const result = await contacts.listContacts();
@@ -10,7 +10,7 @@ const getAllContacts = async (_, res) => {
 const getContactById = async (req, res) => {
   const { id } = req.params;
   const result = await contacts.getContact(id);
-  if (!result) throw HttpError(404, "Not found");
+  if (!result) throw HttpError(404, 'Not found');
   res.json(result);
 };
 
@@ -22,16 +22,16 @@ const addNewContact = async (req, res) => {
 const deleteContactById = async (req, res) => {
   const { id } = req.params;
   const result = await contacts.removeContact(id);
-  if (!result) throw HttpError(404, "Not found");
+  if (!result) throw HttpError(404, 'Not found');
   res.status(200).json({
-    message: "contact deleted",
+    message: 'contact deleted',
   });
 };
 
 const updateContactById = async (req, res) => {
   const { id } = req.params;
   const result = await contacts.updateContact(id, req.body);
-  if (!result) throw HttpError(404, "Not found");
+  if (!result) throw HttpError(404, 'Not found');
   res.json(result);
 };
 
