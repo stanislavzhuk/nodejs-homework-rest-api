@@ -1,6 +1,6 @@
-import HttpError from "../helpers/index.js";
+import HttpError from '../helpers/index.js';
 
-const validateReqBody = (schema) => {
+const isEmptyBody = schema => {
   const func = (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
@@ -12,4 +12,4 @@ const validateReqBody = (schema) => {
   return func;
 };
 
-export default validateReqBody;
+export default isEmptyBody;
