@@ -6,6 +6,7 @@ import {
   isEmptyBody,
   authenticate,
   isSubscription,
+  upload,
 } from '../../middlewares/index.js';
 
 const authRouter = express.Router();
@@ -34,6 +35,13 @@ authRouter.patch(
   isSubscription,
   isEmptyBody(schema.updateSubscriptionSchema),
   ctrl.updateSubscription
+);
+
+authRouter.patch(
+  '/avatars',
+  authenticate,
+  upload.single('avatar'),
+  ctrl.updateAvatar
 );
 
 export default authRouter;
