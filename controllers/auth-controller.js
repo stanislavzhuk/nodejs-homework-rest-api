@@ -45,8 +45,6 @@ const signup = async (req, res) => {
     user: {
       email: newUser.email,
       subscription: newUser.subscription,
-      // verify: newUser.verify,
-      // verificationToken: newUser.verificationToken,
     },
   });
 };
@@ -67,7 +65,26 @@ const verify = async (req, res) => {
 };
 
 const resendVerifyEmail = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) throw HttpError(404, 'User not found');
+  if (user.verify) throw HttpError(400, 'Verification has already been passed');
 
+  const verifyEmail = {
+    to: email,
+    subject: 'Verify email #2',
+    html: `
+    <div style="${emailStyle}">
+        <a target="_blank" href="${BASE_URL}/users/verify/${user.verificationToken}" style="${buttonStyle}">Click to verify email</a>
+    </div>
+  `,
+  };
+
+  await sendEmail(verifyEmail);
+
+  res.status(200).json({
+    message: 'Verification email sent',
+  });
 };
 
 const signin = async (req, res) => {

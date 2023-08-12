@@ -20,7 +20,11 @@ authRouter.post(
 
 authRouter.get('/verify/:verificationToken', ctrl.verify);
 
-authRouter.post('/verify', ctrl.resendVerifyEmail);
+authRouter.post(
+  '/verify',
+  isEmptyBody(schema.userEmailSchema),
+  ctrl.resendVerifyEmail
+);
 
 authRouter.post(
   '/login',
