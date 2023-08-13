@@ -18,6 +18,14 @@ authRouter.post(
   ctrl.signup
 );
 
+authRouter.get('/verify/:verificationToken', ctrl.verify);
+
+authRouter.post(
+  '/verify',
+  isEmptyBody(schema.userEmailSchema),
+  ctrl.resendVerifyEmail
+);
+
 authRouter.post(
   '/login',
   isEmptyReq,
